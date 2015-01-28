@@ -1,0 +1,244 @@
+<?php
+/*
+Plugin Name: MyShop Activate
+Description: MyShop Activate
+Author: andrew
+Version: 1.0
+Author URI: http://www.onemoredesign.ru
+*/
+
+function my_hook(){
+
+	global $wp_query;		
+    $url = parse_url($_SERVER['REQUEST_URI']);		    
+    if( preg_match('/^\/catalog/',$url['path']) ){
+            
+        // Подавляем вывод
+		unset($wp_query->query["error"]);
+		$wp_query->query_vars["error"]="";
+		$wp_query->is_404=false;
+		status_header( 200 );
+
+        if (file_exists(TEMPLATEPATH . "/shop.php")) {
+            include(TEMPLATEPATH . "/shop.php");
+			exit;
+        }
+    }
+    elseif ( preg_match('/^\/payment/',$url['path']) ){
+
+        // Подавляем вывод
+		unset($wp_query->query["error"]);
+		$wp_query->query_vars["error"]="";
+		$wp_query->is_404=false;
+		status_header( 200 );
+
+            
+        if( file_exists(TEMPLATEPATH . "/pay.php") ) {
+            include(TEMPLATEPATH . "/pay.php");
+			exit;
+
+        }
+    }
+	elseif (preg_match('/^\/search/',$url['path']) ){
+		unset($wp_query->query["error"]);
+		$wp_query->query_vars["error"]="";
+        $wp_query->is_404=false;
+		status_header( 200 );
+            
+        if (file_exists(TEMPLATEPATH . "/searchc.php")) {
+            include(TEMPLATEPATH . "/searchc.php");
+			exit;
+        }		
+	}
+	elseif (preg_match('/^\/item_/',$url['path']) ){
+		
+		$line=str_replace('/item_', '', $url['path']);
+		$line=str_replace('.html', '', $line);
+		$pos = strpos ($line, "_");
+		$old_id=substr($line, 0, $pos);		
+		$result= mysql_query("SELECT ID FROM shop_catalog WHERE old_id=$old_id ");
+		$row=mysql_fetch_array($result);
+		$ID=$row['ID'];
+		header('Location: http://europrofcosmetic.ru/catalog/products/'.$ID);
+	}	    
+}
+//
+
+function give_me_url(){
+	//global $wp_query;
+	global $URL_PARTS;
+	
+	$url = parse_url($_SERVER['REQUEST_URI']);
+	$line=$url['path'];
+	
+	$i=0;	
+
+	while ($line) {
+		$pos = strpos ($line, "/");
+		if ($pos!==false) {
+			if ($pos>0) $URL_PARTS[$i] =  trim(substr ($line, 0, $pos ));
+			$line = substr_replace ($line, "", 0, $pos+1 ) ;
+		} else {
+			$URL_PARTS[$i]=$line;
+			$line='';
+		}
+		if ($pos>0) $i++;
+	}
+
+	if (!$URL_PARTS[1]){
+		if ($URL_PARTS[0]!='catalog.html'){
+			$line=str_replace('catalog_', '', $URL_PARTS[0]);
+			$line=str_replace('.html', '', $line);
+			// $URL_PARTS[0]='shop';
+			$URL_PARTS[1]=$line;
+			$URL_PARTS[0]='catalog';
+		}
+		else {
+			$URL_PARTS[0]='catalog';
+		}
+	}
+	
+	return $URL_PARTS;
+}
+
+//
+function title_rewrite($title) {
+    global $new_page_title;
+    return $new_page_title.$title;
+}
+
+
+function get_param($slug){
+
+	$result= mysql_query("SELECT shop_params.ID, shop_params.type, shop_params.name, shop_params.slug, shop_texts.title, shop_texts.page_title, shop_texts.page_keywords, shop_texts.page_description FROM shop_params, shop_texts WHERE shop_params.slug='$slug' AND shop_texts.param_id=shop_params.ID ");
+	while ($row=mysql_fetch_array($result)){		
+		$return[0]=$row['ID'];
+		$return[1]=$row['type'];
+		$return[2]=$row['name'];
+		$return[3]=$row['slug'];
+		$return[4]=$row['title'];
+
+		$return[5]=$row['page_title'];
+		$return[6]=$row['page_keywords'];
+		$return[7]=$row['page_description'];		
+	}
+	return $return;
+}
+//
+
+
+function get_product_title($slug) {
+	$sql="SELECT shop_catalog.name, shop_params.name, shop_params.type, shop_catalog.page_title, shop_catalog.page_keywords, shop_catalog.page_description FROM shop_catalog, shop_params WHERE shop_catalog.id='$slug' AND (shop_catalog.brand=shop_params.ID OR shop_catalog.type=shop_params.ID)";	
+	$result= mysql_query($sql);
+	while ($row=mysql_fetch_array($result)){
+		$item_name=$row[0];
+		if ($row[2]==0) {
+			if ($row[3]!='') $item_type=$row[3];
+			else $item_type=$row[1];
+		}
+		if ($row[2]==1) {
+			if ($row[3]!='') $item_sex=$row[3];
+			else $item_sex=$row[1];
+		}
+		if ($row[2]==2) {
+			if ($row[3]!='') $item_brand=$row[3];
+			else $item_brand=$row[1];
+		}
+		$page_title=$row['page_title'];
+		$page_keywords=$row['page_keywords'];
+		$page_description=$row['page_description'];
+	}
+
+	$title['title']=$item_type.' '.$item_brand.' '.$item_name.' ';
+	if ($page_title!='') $title['title']=$page_title;
+		$title['title']='Купить '.$title['title'].' с доставкой в Москве ';
+	if ($page_keywords!='') $title['keywords']=$page_keywords;
+	if ($page_description!='') $title['description']=$page_description;
+	return $title;
+}
+
+give_me_url();
+$ok=0;
+
+print_r($URL_PARTS);
+
+if ($URL_PARTS[0]=='catalog'){
+	if ($URL_PARTS[1]!='products'){
+		if ($URL_PARTS[1]=='order'){
+			$ok=1;
+		}
+		else {
+			$sql="SELECT ID FROM shop_params WHERE archive=0";
+			$x=1;
+			foreach ($URL_PARTS as $slug) {
+				if ($slug!=='shop') {
+					if ($x==1) {
+						$sql.=" AND (slug='$slug'";
+						$x=2;
+					}
+					else $sql.=" OR slug='$slug'";
+				}
+			}
+			$sql.=')';
+		}
+	}
+	elseif ($URL_PARTS[1]=='products'){
+		$slug=$URL_PARTS[2];
+		// $sql="SELECT ID FROM shop_catalog WHERE publish=1 AND slug='$slug'";
+		$sql="SELECT ID FROM shop_catalog WHERE archive=0 AND id='$slug'";
+	}
+	
+	// print $sql;
+	if ($sql) {
+		$result= mysql_query($sql);
+		while ($row=mysql_fetch_array($result)){
+			$ok=1;
+		}
+	}
+}
+elseif ($URL_PARTS[0]=='payment'){
+	$ok=1;
+
+}
+
+if ($ok==1) {
+	add_action('template_redirect', 'my_hook');
+	add_filter('wp_title', 'title_rewrite');
+
+	global $param;
+	if ($URL_PARTS[0]=='shop'){
+		if ($URL_PARTS[1]!='products'){
+			$param=get_param($URL_PARTS[1]);
+			$PRETEXT=$param[4];
+			for ($i=2;$i<count($URL_PARTS);$i++){
+				$titlaz=get_param($URL_PARTS[$i]);
+				if ($titlaz[5]!='') $titla.=' '.$titlaz[5];
+				else $titla.=' '.$titlaz[2];			
+			}
+			$new_title=$param[2].$titla.' ';
+
+			if ($param[5]!='') $new_page_title=$param[5].$titla.' ';
+			else  $new_page_title=$param[2].$titla.' ';
+
+			$page_keywords=$param[6];
+			$page_description=$param[7];
+			
+		}
+		else {
+			//$product_name = mysql_fetch_array(mysql_query("select name from `shop_catalog` WHERE id=$URL_PARTS[2]"));
+			$ttl=get_product_title($URL_PARTS[2]);
+			$new_page_title=$ttl['title'];
+			$page_keywords=$ttl['keywords'];
+			$page_description=$ttl['description'];
+
+		}
+	}
+	elseif ($URL_PARTS[0]=='payment'){
+		$new_page_title='Оплата заказа';
+	}
+
+	
+}
+
+
+?>

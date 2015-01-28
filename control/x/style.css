@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+body {
+	background:url(back.jpg) top repeat-x;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	margin:20px;
+}
+
+.table{
+	background:#CCCCCC;
+	width:100%;
+}
+.table td{
+	background:#FFFFFF;
+}

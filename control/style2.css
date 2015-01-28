@@ -1,0 +1,140 @@
+@charset "UTF-8";
+
+body {
+	/*padding: 10px;*/
+}
+
+.item_categories{
+	font-size:14px;
+	padding:10px;
+	background:#FFF;
+	border:1px solid #EEE;
+}
+.item_categories a{
+	color:#333;
+}
+.item_categories ul {
+	list-style:none;
+	margin:0px;
+	padding:0px;
+}
+.item_categories li {
+	display: inline-block;
+	padding:3px 5px;
+}
+.item_categories li.active{
+	background:#EEE;
+	border-bottom:1px solid #999;
+}
+.add_form{
+	padding:10px 15px;
+	background:#EEE;
+	border:1px solid #CCC;
+	margin:10px 0;
+}
+
+.menu{
+	background:#FFFFFF;
+	padding:10px;
+}
+.containter{
+	margin:10px 20px;
+}
+
+.add_item{
+	background:#EEEEEE;
+	padding:10px;
+	border:1px solid #CCCCCC;
+	margin:10px 0;
+
+}
+.add_item h2{
+	margin:0px 0px 5px 0;
+	font-size:13px;
+}
+.add_item_click{
+	margin:10px 0;
+}
+.add_item_click a{
+	text-decoration:none;
+	font-size:14px;
+	font-weight:bold;
+	color:#333333;
+}
+.add_item_click a:hover{
+	color:#336600;
+}
+
+.nav{
+	text-align:right;
+}
+
+h3{
+	margin:7px 0;
+	font-size:14px;
+	font-weight:normal;
+}
+
+.add_xls{
+	background:#99CC55;
+	padding:5px 10px;
+	margin:5px 0px;
+}
+.struct{
+	margin:5px 0px;
+	padding:10px;
+	border:1px solid #CCCCCC;
+	background:#FFFFFF;
+}
+.table{
+	background:#CCCCCC;
+	width:100%;
+}
+.table td{	background:#FFFFFF; }
+
+.ord_table{
+	background:#FFFFFF;
+	width:100%;
+}
+
+.order_data .col-sm-6, .order_data .col-sm-4 {
+	margin-top: 10px;
+}
+
+.ord_table tr:hover{ background:#EEEEEE; }
+.ord_table td{ padding:4px; }
+.sl tr:hover{ background:none;}
+
+.status{
+	
+	text-align:center;
+}
+	.status a{
+		text-decoration:none;
+		color:#333333;
+		font-size:16px;
+	}
+	
+	.table .s0{background:#99FF99;	}
+	.table .s1{background:#00CCFF;	}
+	.table .s2{background:#FF99FF;	}
+	.table .s3{background:#FF3366;	}
+	.table .s4{background:#666666;	}	
+	.table .s5{background:#9999FF;	}
+	.table .s6{background:#FFCC00;	}		
+	.table .s7{background:#6699FF;	}	
+
+.table .selected{
+	padding: 15px;
+
+}
+
+.is0{ font-style:italic; color:#FFFFFF;}
+.is1{ font-style:italic; color:#FF0000;}
+.is2{ font-style:italic; color:#33CC00;}
+
+.filters{ margin:7px 0 5px 0;}
+.filters a{
+	background:#FFFFFF;
+	padding:5px 10px; margin-right:5px;
+}

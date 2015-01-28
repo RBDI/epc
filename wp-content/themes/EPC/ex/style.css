@@ -1,0 +1,357 @@
+/*
+Theme Name: EuroProfCosmetic
+Author: Andrew
+Author URI: http://www.onemoredesign.ru
+*/
+
+   
+body {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  background: url(images/back_logos.jpg);
+}
+
+a{
+  color: #2a1f7f;
+}
+
+/* Custom container */
+.container {
+  margin: 0 auto;
+  max-width: 1000px;
+}
+.container > hr {
+  margin: 60px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  margin: 80px 0;
+  text-align: center;
+  background: #FFF;
+  padding: 40px 30px;
+}
+.jumbotron h1 {
+  font-size: 100px;
+  line-height: 1;
+}
+.jumbotron .lead {
+  font-size: 24px;
+  line-height: 1.25;
+}
+.jumbotron .btn {
+  font-size: 21px;
+  padding: 14px 24px;
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 60px 0;
+}
+.marketing p + h4 {
+  margin-top: 28px;
+}
+
+
+/* Customize the navbar links to be fill the entire space of the .navbar */
+      .navbar .navbar-inner {
+        padding: 0;
+      }
+      .navbar .nav {
+        margin: 0;
+        display: table;
+        width: 100%;
+      }
+      .navbar .nav li {
+        display: table-cell;
+        width: 1%;
+        float: none;
+      }
+      .navbar .nav li a {
+        font-weight: bold;
+        text-align: center;
+        border-left: 1px solid rgba(255,255,255,.2);
+        border-right: 1px solid rgba(0,0,0,.1);
+      }
+      .navbar .nav li:first-child a {
+        border-left: 0;
+        border-radius: 3px 0 0 3px;
+      }
+      .navbar .nav li:last-child a {
+        border-right: 0;
+        border-radius: 0 3px 3px 0;
+      }
+
+
+.bottom_logos img{
+  width:66px;
+  height: auto;
+  margin-left: 31px;
+  margin-bottom: 15px;
+}
+
+.product{
+  height: 320px;
+
+}
+.product h4{
+  font-size: 14px;
+  line-height: 16px;
+
+}
+.product-price-big{
+  font-size: 28px;
+}
+.product-data{
+  margin-top: -10px;
+}
+.product-data select{
+  width: auto;
+}
+.preview_s img{
+  width: 100px;
+  height: auto;
+  border: 1px solid #EEE;
+}
+
+.row-fluid {
+  background: #FFF;
+  padding: 20px 0px;
+}
+
+.white-block{
+  background: #FFF;
+  padding: 20px;
+  padding-top: 0px;
+}
+
+.footer{
+  background: #EEE;
+  padding:10px 20px;
+  font-size: 11px;
+  margin-top: 20px;
+  line-height: 16px;
+  border-top: 1px solid #CCC;
+  color: #555;
+}
+.underfooter{
+  background:#CCC;
+  padding:10px 20px;
+  margin: 0px -20px -10px -20px;
+}
+
+/* CUSTOMIZE THE CAROUSEL
+-------------------------------------------------- */
+
+/* Carousel base class */
+.carousel {
+  margin-bottom: 60px;
+}
+
+.carousel .container {
+  position: relative;
+  z-index: 9;
+  
+}
+
+.carousel-control {
+  height: 80px;
+  margin-top: 0;
+  font-size: 120px;
+  text-shadow: 0 1px 1px rgba(0,0,0,.4);
+  background-color: transparent;
+  border: 0;
+  z-index: 10;
+  color: #eee;
+}
+
+.carousel .item {
+  height: 350px;
+  background: #FFF;
+}
+.carousel img {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  
+  height: 350px;
+}
+.carousel img.logo {
+  position: absolute;
+  top: 180px;
+  left: 790px;   
+  width: 180px;
+  height: auto;
+}
+.today_promo{
+  padding: 10px 15px;
+  background: #ff6565;
+  color: #FFF;
+  font-weight: bold;
+  float: right;
+  font-size: 20px;
+  z-index: 1000;
+}
+.carousel-caption {
+  background-color: transparent;
+  position: static;
+  max-width: 700px;
+  padding: 0 20px;
+  margin-top: 30px;
+  margin-left: 350px;
+}
+.carousel-caption p {
+  color: #333;
+}
+.carousel-caption .lead{
+  font-size: 45px;
+}
+.carousel-caption .h1,
+.carousel-caption .lead {
+  margin: 0;
+  line-height: 1.25;
+  color: #333;
+  text-shadow: 0 1px 1px rgba(255,255,255,.4);
+}
+.carousel-caption .h1{
+  margin-top: 15px;
+  font-family: Roboto, Arial;
+  font-weight: 500;
+  font-size: 38.5px;
+  text-rendering: optimizelegibility;
+}
+.carousel-caption .btn {
+  margin-top: 10px;
+}
+
+.product-desc{
+  text-align: center;
+}
+.product-price{
+  margin-top: 3px;
+}
+.product-desc h4{
+  font-size: 13px;
+  margin: 0px;
+}
+.carousel-inner{
+  border-bottom: 1px solid #CCC;
+  border-top: 1px solid #CCC;
+}
+
+.header{
+  /*background: rgba(255,255,255,.9);*/
+  background: url(images/_bk.png) #009bdd;
+  height: 110px;
+  margin-bottom: 20px;
+  padding: 0px 0px 15px 0px;
+  border-radius: 0 0px 10px 10px;
+  color: #FFF;
+}
+
+.muted{
+  margin-left: 10px;
+  margin-top: 2px;
+}
+.muted img{
+  
+}
+.pagination {
+  margin: 0px 0px 20px 0px;
+  text-align: center;
+}
+
+h2{
+    line-height: 27px;
+}
+
+.index_text{
+  font-size:12px;
+  padding:0px 30px;
+  color: #444;
+}
+.index_text h1{
+  font-size: 20px;
+  margin: 10px 0px 10px 0px;
+  line-height: 20px;
+}
+
+.srch{
+  margin-top: -15px;
+  margin-bottom: 15px;
+  background: #009bdd;
+  color: #FFF;
+  padding: 10px;
+  margin-left: -10px;
+  font-size: 12px;
+
+}
+.srch form{
+  margin: 0px;
+}
+.srch select{
+  font-size: 12px;
+  width: auto;
+  margin-bottom: 0px;
+  height: 28px;
+  
+}
+.breadcrumb {
+  font-size: 12px;
+  border-bottom: 1px solid #EEE;
+  padding: 0px 0px 10px 0px;
+  background: none;
+  margin-top: -10px;
+}
+.breadcrumb li{
+  margin-right: 15px;
+  text-align: center;
+}
+.basket{
+  border-radius: 5px 5px 5px 5px;
+  background: #FFF;
+  color: #333;
+  padding: 15px 20px;
+  height: 50px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.h_cont{
+  margin-top: 13px;
+  color: #CCC;
+}
+.phone{
+  font-family: Roboto, Arial; 
+  font-weight: 500;
+  font-size: 20px;
+  color: #FFF;
+}
+.phone a{
+  color: #fff;
+}
+.mail{
+  font-size: 18px;
+  color: #FFF;
+}
+
+h1,h2,h3{
+  font-family: Roboto, Arial; 
+  /*font-family: Elsie, Times;*/
+  font-weight: 500;
+}
+.top-menu{
+  margin-top:5px;
+  font-family: Roboto, Arial; 
+  /*font-family: Elsie, Times;*/
+  font-weight: 500;
+  font-size:18px;
+}
+.top-menu a{
+  color: #FFF;
+  text-decoration: underline;  
+}
+.top-menu a:hover{
+  color: #CCC;
+}
+
